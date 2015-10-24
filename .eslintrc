@@ -1,0 +1,16 @@
+{
+    "extends": "eslint:recommended",
+    "parser": "babel-eslint",
+    "env": {
+        "node": true,
+        "mocha": true,
+        "es6": true,
+        "commonjs": true
+    },
+    "ecmaFeatures": {
+        "modules": true
+    },
+    "rules": {
+        "strict": 0
+    }
+}
