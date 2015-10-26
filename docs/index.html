@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git+https://github.com/jasonmorganson/WarbyParker.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Matcher.js~Matcher.html">Matcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Parser.js~Parser.html">Parser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Pattern.js~Pattern.html">Pattern</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Patterns.js~Patterns.html">Patterns</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Utilities.js~Utilities.html">Utilities</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-WP">WP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Transform">Transform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-matcher">matcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-parser">parser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-pattern">pattern</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-patterns">patterns</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilities">utilities</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="pattern-matching-paths">Pattern-Matching Paths</h1>
+<h2 id="problem-description">Problem Description</h2>
+<p>You&apos;ve been given two lists: the first is a list of patterns, the second
+is a list of slash-separated paths. Your job is to print, for each path,
+the pattern which best matches that path. (&quot;Best&quot; is defined more
+rigorously below, under &quot;Output Format&quot;.)</p>
+<p>A pattern is a comma-separated sequence of non-empty fields. For a
+pattern to match a path, every field in the pattern must exactly match
+the corresponding field in the path. (Corollary: to match, a pattern and
+a path must contain the same number of fields.) For example: the pattern
+<code>x,y</code> can only match the path <code>x/y</code>. Note, however, that leading and
+trailing slashes in paths should be ignored, thus <code>x/y</code> and <code>/x/y/</code> are
+equivalent.</p>
+<p>Patterns can also contain a special field consisting of a <em>single
+asterisk</em>, which is a wildcard and can match any string in the path.</p>
+<p>For example, the pattern <code>A,*,B,*,C</code> consists of five fields: three
+strings and two wildcards. It will successfully match the paths
+<code>A/foo/B/bar/C</code> and <code>A/123/B/456/C</code>, but not <code>A/B/C</code>,
+<code>A/foo/bar/B/baz/C</code>, or <code>foo/B/bar/C</code>.</p>
+<h2 id="input-format">Input Format</h2>
+<p>The first line contains an integer, N, specifying the number of
+patterns. The following N lines contain one pattern per line. You may
+assume every pattern is unique. The next line contains a second integer,
+M, specifying the number of paths. The following M lines contain one
+path per line. Only ASCII characters will appear in the input.</p>
+<h2 id="output-format">Output Format</h2>
+<p>For each path encountered in the input, print the <em>best-matching
+pattern</em>. The best-matching pattern is the one which matches the path
+using the fewest wildcards.</p>
+<p>If there is a tie (that is, if two or more patterns with the same number
+of wildcards match a path), prefer the pattern whose leftmost wildcard
+appears in a field further to the right. If multiple patterns&apos; leftmost
+wildcards appear in the same field position, apply this rule recursively
+to the remainder of the pattern.</p>
+<p>For example: given the patterns <code>*,*,c</code> and <code>*,b,*</code>, and the path
+<code>/a/b/c/</code>, the best-matching pattern would be <code>*,b,*</code>.</p>
+<p>If no pattern matches the path, print <code>NO MATCH</code>.</p>
+<h2 id="submission-requirements">Submission Requirements</h2>
+<p>You should submit a working program, runnable from a command line, that
+reads from standard input and prints to standard output. In Unix
+parlance, for example, it should be runnable like this:</p>
+<pre><code><code class="source-code prettyprint">cat input_file | python your_program.py &gt; output_file</code>
+</code></pre><p>Of course, the actual command line may vary depending on the language
+you choose; your program file need not be executable on its own.
+However, it <strong>must</strong> read input directly from stdin and print to stdout.</p>
+<p>You may write your program in any of the following languages:</p>
+<ul>
+<li>Go (1.1 or above)</li>
+<li>Java (JDK6 or above)</li>
+<li>JavaScript (Node.js)</li>
+<li>PHP (5.3 or above)</li>
+<li>Perl5 (5.10 or above)</li>
+<li>Python (2.7 or 3.x)</li>
+<li>Ruby (1.9 or 2.x)</li>
+<li>Scala (2.10 or above)</li>
+</ul>
+<p>For Go, Java, and Scala, send source code, not compiled artifacts. For
+Java and Scala submissions, please include some kind of makefile, e.g.
+for Maven, Ant, SBT, etc.</p>
+<h2 id="extra-credit">Extra Credit</h2>
+<p>What&apos;s the algorithmic complexity of your program? In other words, how
+does its running time change as the number of patterns or number of
+paths increases?</p>
+<p>Would your program complete quickly even when given hundreds of
+thousands of patterns and paths? Is there a faster solution?</p>
+<p>Hint: although a correct program is sufficient, there is extra credit
+for an algorithm that&apos;s better than quadratic. Some of our test cases
+are very large. To pass them all, your program will need to be pretty
+fast!</p>
+<h2 id="example-input">Example Input</h2>
+<pre><code><code class="source-code prettyprint">6
+*,b,*
+a,*,*
+*,*,c
+foo,bar,baz
+w,x,*,*
+*,x,y,z
+5
+/w/x/y/z/
+a/b/c
+foo/
+foo/bar/
+foo/bar/baz/</code>
+</code></pre><h2 id="example-output">Example Output</h2>
+<pre><code><code class="source-code prettyprint">*,x,y,z
+a,*,*
+NO MATCH
+NO MATCH
+foo,bar,baz</code>
+</code></pre><h2 id="note-about-the-examples">Note about the examples</h2>
+<p>Because this document is in Markdown format, we have to indent every
+line in a pre-formatted code block by 4 spaces. Therefore, in both the
+example input and output above, you should pretend those 4 leading
+spaces aren&apos;t there, because they won&apos;t be in the actual test input.</p>
+<h2 id="tips">Tips</h2>
+<ul>
+<li>Code correctness and quality matter more to us than algorithmic
+wizardry. Is your program easy to understand? Is it clearly organized
+and documented? Does it correctly handle all the edges cases? Imagine
+you are writing a library for other developers to use. How would that
+affect your design?</li>
+<li>Your program&apos;s output must precisely match the expected output. Don&apos;t
+print extraneous or superfluous stuff to stdout.</li>
+<li>The example input and output provided above fail to cover a large
+number of edge cases. To be sure your program is correct, you may want
+to supplement it with your own test cases.</li>
+<li>Every line in the input ends with a Unix-style newline (<code>&quot;\n&quot;</code>).
+DOS-style CRLFs (<code>&quot;\r\n&quot;</code>) are not used.</li>
+<li>Each line in the output should end with a newline character (that
+includes the final one). As with the input, use Unix-style newlines.</li>
+</ul>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.1)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

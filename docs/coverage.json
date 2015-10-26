@@ -1,0 +1,62 @@
+{
+  "coverage": "45.71%",
+  "expectCount": 35,
+  "actualCount": 16,
+  "files": {
+    "src/Matcher.js": {
+      "expectCount": 5,
+      "actualCount": 2,
+      "undocumentLines": [
+        6,
+        45,
+        22
+      ]
+    },
+    "src/Parser.js": {
+      "expectCount": 9,
+      "actualCount": 3,
+      "undocumentLines": [
+        22,
+        24,
+        25,
+        26,
+        83,
+        23
+      ]
+    },
+    "src/Pattern.js": {
+      "expectCount": 11,
+      "actualCount": 5,
+      "undocumentLines": [
+        29,
+        16,
+        94,
+        22,
+        19,
+        26
+      ]
+    },
+    "src/Patterns.js": {
+      "expectCount": 6,
+      "actualCount": 4,
+      "undocumentLines": [
+        12,
+        57
+      ]
+    },
+    "src/Utilities.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        23
+      ]
+    },
+    "src/wp.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    }
+  }
+}

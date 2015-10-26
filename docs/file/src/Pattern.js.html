@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/Pattern.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git+https://github.com/jasonmorganson/WarbyParker.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Matcher.js~Matcher.html">Matcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Parser.js~Parser.html">Parser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Pattern.js~Pattern.html">Pattern</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Patterns.js~Patterns.html">Patterns</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Utilities.js~Utilities.html">Utilities</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-WP">WP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Transform">Transform</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-matcher">matcher</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-parser">parser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-pattern">pattern</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-patterns">patterns</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilities">utilities</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/Pattern.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * A representation of a pattern.
+ */
+class Pattern {
+
+    /**
+     * Construct a {Pattern}
+     * Construct a new {Pattern} from a given string
+     * @param {String} string - a string to use to construct pattern from.
+     */
+    constructor (string) {
+
+        string = String(string)
+
+        // Store the original string.
+        this.originalPattern = string
+
+        // Split the string into a tokens.
+        this.tokens = string.split(&apos;,&apos;)
+
+        // Covert string into a regular expression.
+        this.regularExpression = new RegExp(string.replace(/,/g, &apos;/&apos;)
+                                                  .replace(/\*/g, &apos;.*&apos;))
+
+        // Count of wildcards in the pattern.
+        this.wildcards = 0
+
+        // Location of the left most wildcard.
+        this.leftMostWildcardIndex = null
+
+        this.tokens.forEach((token, index) =&gt; {
+
+            // If the token is a wildcard.
+            if (token === &apos;*&apos;) {
+
+                this.wildcards++
+
+                if (this.leftMostWildcardIndex === null) this.leftMostWildcardIndex = index
+            }
+        })
+    }
+
+    /**
+     * Match pattern.
+     * Matches a string to this pattern.
+     * @param {String} string - string to match.
+     * @return {Boolean} true if the string matches this pattern; false
+     * otherwise.
+     */
+    match (string) {
+
+        return String(string).match(this.regularExpression)
+    }
+
+    /**
+     * Compare pattern.
+     * Compares a given pattern against this pattern.
+     * @param {Pattern} pattern - a pattern to compare against.
+     * @return {Pattern} the winning {Pattern}.
+     */
+    compare (pattern) {
+
+        // Return this pattern if there is nothing to compare
+        if (!pattern) return this
+
+        // If the patterns have the same number of wildcards.
+        if (pattern.wildcards === this.wildcards) {
+
+            // If the patterns left most wildcard is further to the right then
+            // return the pattern; otherwise return this pattern.
+            if (pattern.leftMostWildcardIndex &gt; this.leftMostWildcardIndex) return pattern
+            else return this
+        }
+
+        // If the pattern has less wildcards that this pattern then return the
+        // pattern.
+        else if (pattern.wildcards &lt; this.wildcards) return pattern
+
+        // Otherwise; return this pattern.
+        else return this
+    }
+
+    /**
+     * Convert to string.
+     * Convert {Pattern} to {String}.
+     * @return {String} string representation of the pattern.
+     */
+    toString () {
+
+        return this.originalPattern
+    }
+}
+
+export default Pattern
+
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.1)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,1787 @@
+[
+  {
+    "__docId__": 0,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/Matcher.js",
+    "memberof": null,
+    "longname": "src/Matcher.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import stream from 'stream'\n\nconst NEW_LINE = '\\n'\nconst NO_MATCH = 'NO MATCH'\n\nconst Transform = stream.Transform\n\n/**\n * A streaming string matcher.\n * Matches strings in a stream to known patterns.\n */\nclass Matcher extends Transform {\n\n  /**\n   * Construct transform.\n   * @param {Patterns} patterns - a Patterns instance to match patterns from.\n   */\n  constructor (patterns) {\n\n    super()\n\n    this.patterns = patterns\n  }\n\n  /**\n   * transform stream.\n   */\n  _transform (chunk, encoding, processed) {\n\n    // Convert the chunk to a string.\n    const string = chunk.toString()\n\n    // Check string for a pattern match.\n    let match = this.patterns.match(string)\n\n    // If no match; default to no match string.\n    match = match || NO_MATCH\n\n    // Push match string into stream.\n    this.push(match + NEW_LINE)\n\n    processed()\n  }\n}\nexport default Matcher\n"
+  },
+  {
+    "__docId__": 1,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "NEW_LINE",
+    "memberof": "src/Matcher.js",
+    "longname": "src/Matcher.js~NEW_LINE",
+    "access": null,
+    "export": false,
+    "importPath": "@jasonmorganson/wp/src/Matcher.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 2,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "NO_MATCH",
+    "memberof": "src/Matcher.js",
+    "longname": "src/Matcher.js~NO_MATCH",
+    "access": null,
+    "export": false,
+    "importPath": "@jasonmorganson/wp/src/Matcher.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 3,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "Transform",
+    "memberof": "src/Matcher.js",
+    "longname": "src/Matcher.js~Transform",
+    "access": null,
+    "export": false,
+    "importPath": "@jasonmorganson/wp/src/Matcher.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 4,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Matcher",
+    "memberof": "src/Matcher.js",
+    "longname": "src/Matcher.js~Matcher",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/Matcher.js",
+    "importStyle": "Matcher",
+    "description": "A streaming string matcher.\nMatches strings in a stream to known patterns.",
+    "lineNumber": 12,
+    "interface": false,
+    "extends": [
+      "Transform"
+    ]
+  },
+  {
+    "__docId__": 5,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/Matcher.js~Matcher",
+    "longname": "src/Matcher.js~Matcher#constructor",
+    "access": null,
+    "description": "Construct transform.",
+    "lineNumber": 18,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Patterns"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "patterns",
+        "description": "a Patterns instance to match patterns from."
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 6,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "patterns",
+    "memberof": "src/Matcher.js~Matcher",
+    "longname": "src/Matcher.js~Matcher#patterns",
+    "access": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 7,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_transform",
+    "memberof": "src/Matcher.js~Matcher",
+    "longname": "src/Matcher.js~Matcher#_transform",
+    "access": null,
+    "description": "transform stream.",
+    "lineNumber": 28,
+    "params": [
+      {
+        "name": "chunk",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "encoding",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "processed",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 8,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "matcher",
+    "memberof": "src/Matcher.js",
+    "longname": "src/Matcher.js~matcher",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/Matcher.js",
+    "importStyle": "matcher",
+    "description": null,
+    "lineNumber": 45,
+    "undocument": true,
+    "type": {
+      "types": [
+        "src/Matcher.js~Matcher"
+      ]
+    }
+  },
+  {
+    "__docId__": 9,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/Parser.js",
+    "memberof": null,
+    "longname": "src/Parser.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import stream from 'stream'\nimport Format from './Format'\nimport Pattern from './Pattern'\nimport Utilities from './Utilities'\n\nconst Transform = stream.Transform\n\n/**\n * Stream parser\n */\nclass Parser extends Transform {\n\n  /**\n   * Construct transform.\n   * @param {Patterns} patterns - a Patterns instance to collect patterns found.\n   * @param {Format} format - a Format to parse in.\n   */\n  constructor (patterns, format = Format) {\n\n    super()\n\n    this.format = format\n    this.patterns = patterns\n    this.lineNumber = 1\n    this.numberOfPaths = 0\n    this.numberOfPatterns = 0\n  }\n\n  /**\n   * Advances the parser to the next line.\n   */\n  nextLine () {\n\n    // Advance line number to the next line.\n    this.lineNumber++\n  }\n\n  /**\n   * transform stream.\n   */\n  _transform (chunk, encoding, processed) {\n\n    // Convert the chunk to a string.\n    const string = chunk.toString()\n\n    // If on the line which specifies the number of patterns.\n    if (this.format.isNumberOfPatternsLine(this.lineNumber)) {\n\n      // Parse the string as a number and record the number of patterns.\n      this.numberOfPatterns = Utilities.parseNumber(string)\n    }\n\n    // If on a pattern line.\n    else if (this.format.isPatternLine(this.lineNumber, this.numberOfPatterns)) {\n\n      // Create a new pattern from the string.\n      const pattern = new Pattern(string)\n\n      // Add the pattern to the patterns.\n      this.patterns.add(pattern)\n    }\n\n    // If on the line which specifies the number of paths.\n    else if (this.format.isNumberOfPathsLine(this.lineNumber, this.numberOfPatterns)) {\n\n      // Parse the string as a number and record the number of paths.\n      this.numberOfPaths = Utilities.parseNumber(string)\n    }\n\n    // If on a path line.\n    else if (this.format.isPathLine(this.lineNumber, this.numberOfPatterns, this.numberOfPaths)) {\n\n      // Push the string through the stream.\n      this.push(`${string}\\n`)\n    }\n\n    this.nextLine()\n\n    processed()\n  }\n}\n\nexport default Parser\n"
+  },
+  {
+    "__docId__": 10,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "Transform",
+    "memberof": "src/Parser.js",
+    "longname": "src/Parser.js~Transform",
+    "access": null,
+    "export": false,
+    "importPath": "@jasonmorganson/wp/src/Parser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 11,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Parser",
+    "memberof": "src/Parser.js",
+    "longname": "src/Parser.js~Parser",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/Parser.js",
+    "importStyle": "Parser",
+    "description": "Stream parser",
+    "lineNumber": 11,
+    "interface": false,
+    "extends": [
+      "Transform"
+    ]
+  },
+  {
+    "__docId__": 12,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/Parser.js~Parser",
+    "longname": "src/Parser.js~Parser#constructor",
+    "access": null,
+    "description": "Construct transform.",
+    "lineNumber": 18,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Patterns"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "patterns",
+        "description": "a Patterns instance to collect patterns found."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Format"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "format",
+        "description": "a Format to parse in."
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 13,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "format",
+    "memberof": "src/Parser.js~Parser",
+    "longname": "src/Parser.js~Parser#format",
+    "access": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 14,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "patterns",
+    "memberof": "src/Parser.js~Parser",
+    "longname": "src/Parser.js~Parser#patterns",
+    "access": null,
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 15,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "lineNumber",
+    "memberof": "src/Parser.js~Parser",
+    "longname": "src/Parser.js~Parser#lineNumber",
+    "access": null,
+    "description": null,
+    "lineNumber": 24,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 16,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "numberOfPaths",
+    "memberof": "src/Parser.js~Parser",
+    "longname": "src/Parser.js~Parser#numberOfPaths",
+    "access": null,
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 17,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "numberOfPatterns",
+    "memberof": "src/Parser.js~Parser",
+    "longname": "src/Parser.js~Parser#numberOfPatterns",
+    "access": null,
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 18,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "nextLine",
+    "memberof": "src/Parser.js~Parser",
+    "longname": "src/Parser.js~Parser#nextLine",
+    "access": null,
+    "description": "Advances the parser to the next line.",
+    "lineNumber": 32,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 19,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_transform",
+    "memberof": "src/Parser.js~Parser",
+    "longname": "src/Parser.js~Parser#_transform",
+    "access": null,
+    "description": "transform stream.",
+    "lineNumber": 41,
+    "params": [
+      {
+        "name": "chunk",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "encoding",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "processed",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 20,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "numberOfPatterns",
+    "memberof": "src/Parser.js~Parser",
+    "longname": "src/Parser.js~Parser#numberOfPatterns",
+    "access": null,
+    "description": null,
+    "lineNumber": 50,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 21,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "numberOfPaths",
+    "memberof": "src/Parser.js~Parser",
+    "longname": "src/Parser.js~Parser#numberOfPaths",
+    "access": null,
+    "description": null,
+    "lineNumber": 67,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 22,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "parser",
+    "memberof": "src/Parser.js",
+    "longname": "src/Parser.js~parser",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/Parser.js",
+    "importStyle": "parser",
+    "description": null,
+    "lineNumber": 83,
+    "undocument": true,
+    "type": {
+      "types": [
+        "src/Parser.js~Parser"
+      ]
+    }
+  },
+  {
+    "__docId__": 23,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/Pattern.js",
+    "memberof": null,
+    "longname": "src/Pattern.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 4,
+    "content": "/**\n * A representation of a pattern.\n */\nclass Pattern {\n\n    /**\n     * Construct a {Pattern}\n     * Construct a new {Pattern} from a given string\n     * @param {String} string - a string to use to construct pattern from.\n     */\n    constructor (string) {\n\n        string = String(string)\n\n        // Store the original string.\n        this.originalPattern = string\n\n        // Split the string into a tokens.\n        this.tokens = string.split(',')\n\n        // Covert string into a regular expression.\n        this.regularExpression = new RegExp(string.replace(/,/g, '/')\n                                                  .replace(/\\*/g, '.*'))\n\n        // Count of wildcards in the pattern.\n        this.wildcards = 0\n\n        // Location of the left most wildcard.\n        this.leftMostWildcardIndex = null\n\n        this.tokens.forEach((token, index) => {\n\n            // If the token is a wildcard.\n            if (token === '*') {\n\n                this.wildcards++\n\n                if (this.leftMostWildcardIndex === null) this.leftMostWildcardIndex = index\n            }\n        })\n    }\n\n    /**\n     * Match pattern.\n     * Matches a string to this pattern.\n     * @param {String} string - string to match.\n     * @return {Boolean} true if the string matches this pattern; false\n     * otherwise.\n     */\n    match (string) {\n\n        return String(string).match(this.regularExpression)\n    }\n\n    /**\n     * Compare pattern.\n     * Compares a given pattern against this pattern.\n     * @param {Pattern} pattern - a pattern to compare against.\n     * @return {Pattern} the winning {Pattern}.\n     */\n    compare (pattern) {\n\n        // Return this pattern if there is nothing to compare\n        if (!pattern) return this\n\n        // If the patterns have the same number of wildcards.\n        if (pattern.wildcards === this.wildcards) {\n\n            // If the patterns left most wildcard is further to the right then\n            // return the pattern; otherwise return this pattern.\n            if (pattern.leftMostWildcardIndex > this.leftMostWildcardIndex) return pattern\n            else return this\n        }\n\n        // If the pattern has less wildcards that this pattern then return the\n        // pattern.\n        else if (pattern.wildcards < this.wildcards) return pattern\n\n        // Otherwise; return this pattern.\n        else return this\n    }\n\n    /**\n     * Convert to string.\n     * Convert {Pattern} to {String}.\n     * @return {String} string representation of the pattern.\n     */\n    toString () {\n\n        return this.originalPattern\n    }\n}\n\nexport default Pattern\n\n"
+  },
+  {
+    "__docId__": 24,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Pattern",
+    "memberof": "src/Pattern.js",
+    "longname": "src/Pattern.js~Pattern",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/Pattern.js",
+    "importStyle": "Pattern",
+    "description": "A representation of a pattern.",
+    "lineNumber": 4,
+    "interface": false
+  },
+  {
+    "__docId__": 25,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/Pattern.js~Pattern",
+    "longname": "src/Pattern.js~Pattern#constructor",
+    "access": null,
+    "description": "Construct a {Pattern}\nConstruct a new {Pattern} from a given string",
+    "lineNumber": 11,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "string",
+        "description": "a string to use to construct pattern from."
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 26,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "originalPattern",
+    "memberof": "src/Pattern.js~Pattern",
+    "longname": "src/Pattern.js~Pattern#originalPattern",
+    "access": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 27,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "tokens",
+    "memberof": "src/Pattern.js~Pattern",
+    "longname": "src/Pattern.js~Pattern#tokens",
+    "access": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 28,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "regularExpression",
+    "memberof": "src/Pattern.js~Pattern",
+    "longname": "src/Pattern.js~Pattern#regularExpression",
+    "access": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 29,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "wildcards",
+    "memberof": "src/Pattern.js~Pattern",
+    "longname": "src/Pattern.js~Pattern#wildcards",
+    "access": null,
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 30,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "leftMostWildcardIndex",
+    "memberof": "src/Pattern.js~Pattern",
+    "longname": "src/Pattern.js~Pattern#leftMostWildcardIndex",
+    "access": null,
+    "description": null,
+    "lineNumber": 29,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 31,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "leftMostWildcardIndex",
+    "memberof": "src/Pattern.js~Pattern",
+    "longname": "src/Pattern.js~Pattern#leftMostWildcardIndex",
+    "access": null,
+    "description": null,
+    "lineNumber": 38,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 32,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "match",
+    "memberof": "src/Pattern.js~Pattern",
+    "longname": "src/Pattern.js~Pattern#match",
+    "access": null,
+    "description": "Match pattern.\nMatches a string to this pattern.",
+    "lineNumber": 50,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "string",
+        "description": "string to match."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Boolean"
+      ],
+      "spread": false,
+      "description": "true if the string matches this pattern; false\notherwise."
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 33,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "compare",
+    "memberof": "src/Pattern.js~Pattern",
+    "longname": "src/Pattern.js~Pattern#compare",
+    "access": null,
+    "description": "Compare pattern.\nCompares a given pattern against this pattern.",
+    "lineNumber": 61,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Pattern"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pattern",
+        "description": "a pattern to compare against."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Pattern"
+      ],
+      "spread": false,
+      "description": "the winning {Pattern}."
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 34,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "toString",
+    "memberof": "src/Pattern.js~Pattern",
+    "longname": "src/Pattern.js~Pattern#toString",
+    "access": null,
+    "description": "Convert to string.\nConvert {Pattern} to {String}.",
+    "lineNumber": 88,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": "string representation of the pattern."
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 35,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "pattern",
+    "memberof": "src/Pattern.js",
+    "longname": "src/Pattern.js~pattern",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/Pattern.js",
+    "importStyle": "pattern",
+    "description": null,
+    "lineNumber": 94,
+    "undocument": true,
+    "type": {
+      "types": [
+        "src/Pattern.js~Pattern"
+      ]
+    }
+  },
+  {
+    "__docId__": 36,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/Patterns.js",
+    "memberof": null,
+    "longname": "src/Patterns.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 5,
+    "content": "/**\n * A collection of patterns.\n * Collects and stores {Pattern}s to be matched.\n */\nclass Patterns {\n\n    /**\n     * Construct Patterns.\n     */\n    constructor () {\n\n        this.patterns = []\n    }\n\n    /**\n     * Add a pattern.\n     * @param {Pattern} pattern - the pattern to add.\n     */\n    add (pattern) {\n\n        this.patterns.push(pattern)\n    }\n\n    /**\n     * Match a string to a known pattern.\n     * NOTE: The matching algorithm used has not been optimized. It is currently\n     * O(n) where n is the number of patterns.\n     * TODO: Improve efficiency.\n     * @param {String} string - the string to check for a match.\n     * @return {Pattern|null} either the matched {Pattern} or null if no match.\n     */\n    match (string) {\n\n        let match = null\n\n        /**\n         * Matches a pattern\n         * @param {Pattern} pattern - pattern to match.\n         */\n        function matchPattern (pattern) {\n\n            // If the string matches the pattern.\n            if (pattern.match(string)) {\n\n                // Compare against previous match and update.\n                match = pattern.compare(match)\n            }\n        }\n\n        // Match against each pattern.\n        this.patterns.forEach(matchPattern)\n\n        return match\n    }\n}\n\nexport default Patterns\n\n"
+  },
+  {
+    "__docId__": 37,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Patterns",
+    "memberof": "src/Patterns.js",
+    "longname": "src/Patterns.js~Patterns",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/Patterns.js",
+    "importStyle": "Patterns",
+    "description": "A collection of patterns.\nCollects and stores {Pattern}s to be matched.",
+    "lineNumber": 5,
+    "interface": false
+  },
+  {
+    "__docId__": 38,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/Patterns.js~Patterns",
+    "longname": "src/Patterns.js~Patterns#constructor",
+    "access": null,
+    "description": "Construct Patterns.",
+    "lineNumber": 10,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 39,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "patterns",
+    "memberof": "src/Patterns.js~Patterns",
+    "longname": "src/Patterns.js~Patterns#patterns",
+    "access": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 40,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "add",
+    "memberof": "src/Patterns.js~Patterns",
+    "longname": "src/Patterns.js~Patterns#add",
+    "access": null,
+    "description": "Add a pattern.",
+    "lineNumber": 19,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Pattern"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "pattern",
+        "description": "the pattern to add."
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 41,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "match",
+    "memberof": "src/Patterns.js~Patterns",
+    "longname": "src/Patterns.js~Patterns#match",
+    "access": null,
+    "description": "Match a string to a known pattern.\nNOTE: The matching algorithm used has not been optimized. It is currently\nO(n) where n is the number of patterns.\nTODO: Improve efficiency.",
+    "lineNumber": 32,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "string",
+        "description": "the string to check for a match."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Pattern",
+        "null} either the matched {Pattern"
+      ],
+      "spread": false,
+      "description": "or null if no match."
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 42,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "patterns",
+    "memberof": "src/Patterns.js",
+    "longname": "src/Patterns.js~patterns",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/Patterns.js",
+    "importStyle": "patterns",
+    "description": null,
+    "lineNumber": 57,
+    "undocument": true,
+    "type": {
+      "types": [
+        "src/Patterns.js~Patterns"
+      ]
+    }
+  },
+  {
+    "__docId__": 43,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/Utilities.js",
+    "memberof": null,
+    "longname": "src/Utilities.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 4,
+    "content": "/**\n * A set of helper utilities.\n */\nclass Utilities {\n\n  /**\n   * Parses an input given as a number or string into an integer.\n   * @param {Number|String} number - input to parse.\n   * @throws {Error} if the input can not be parsed into an integer.\n   * @returns {Number} a integer.\n   */\n  static parseNumber (number) {\n\n    number = Number(number)\n\n    if (Number.isNaN(number)) throw new Error('Not a number')\n    if (!Number.isInteger(number)) throw new Error('Not an integer')\n\n    return number\n  }\n}\n\nexport default Utilities\n"
+  },
+  {
+    "__docId__": 44,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Utilities",
+    "memberof": "src/Utilities.js",
+    "longname": "src/Utilities.js~Utilities",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/Utilities.js",
+    "importStyle": "Utilities",
+    "description": "A set of helper utilities.",
+    "lineNumber": 4,
+    "interface": false
+  },
+  {
+    "__docId__": 45,
+    "kind": "method",
+    "static": true,
+    "variation": null,
+    "name": "parseNumber",
+    "memberof": "src/Utilities.js~Utilities",
+    "longname": "src/Utilities.js~Utilities.parseNumber",
+    "access": null,
+    "description": "Parses an input given as a number or string into an integer.",
+    "lineNumber": 12,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Number} a integer."
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Number",
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "number",
+        "description": "input to parse."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Number"
+      ],
+      "spread": false,
+      "description": "a integer."
+    },
+    "throws": [
+      {
+        "types": [
+          "Error"
+        ],
+        "description": "if the input can not be parsed into an integer."
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 46,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "utilities",
+    "memberof": "src/Utilities.js",
+    "longname": "src/Utilities.js~utilities",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/Utilities.js",
+    "importStyle": "utilities",
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "type": {
+      "types": [
+        "src/Utilities.js~Utilities"
+      ]
+    }
+  },
+  {
+    "__docId__": 47,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/index.js",
+    "memberof": null,
+    "longname": "src/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import WP from './wp'\n\nconst stdin = process.stdin\nconst stdout = process.stdout\n\nWP(stdin, stdout)\n\nexport default WP\n\n"
+  },
+  {
+    "__docId__": 48,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "stdin",
+    "memberof": "src/index.js",
+    "longname": "src/index.js~stdin",
+    "access": null,
+    "export": false,
+    "importPath": "@jasonmorganson/wp/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 49,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "stdout",
+    "memberof": "src/index.js",
+    "longname": "src/index.js~stdout",
+    "access": null,
+    "export": false,
+    "importPath": "@jasonmorganson/wp/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 50,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/wp.js",
+    "memberof": null,
+    "longname": "src/wp.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import split from 'split'\nimport Parser from './Parser'\nimport Matcher from './Matcher'\nimport Patterns from './Patterns'\n\nfunction WP (input, output) {\n\n  const patterns = new Patterns()\n  const parser = new Parser(patterns)\n  const matcher = new Matcher(patterns)\n\n  input\n  .setEncoding('ascii')\n  .pipe(split())\n  .pipe(parser)\n  .pipe(matcher)\n  .pipe(output)\n}\n\nexport default WP\n\n"
+  },
+  {
+    "__docId__": 51,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "WP",
+    "memberof": "src/wp.js",
+    "longname": "src/wp.js~WP",
+    "access": null,
+    "export": true,
+    "importPath": "@jasonmorganson/wp/src/wp.js",
+    "importStyle": "WP",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "params": [
+      {
+        "name": "input",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "output",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 53,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 64,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 67,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 69,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 74,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 75,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 76,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 77,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 78,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 79,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 80,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 81,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 82,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 83,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 84,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 85,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 86,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 87,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 88,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 89,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 90,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 91,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 92,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 93,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 94,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 95,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 96,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 97,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 98,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 99,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 101,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 102,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 103,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 104,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 105,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 106,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 107,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": null,
+    "builtinExternal": true
+  }
+]
